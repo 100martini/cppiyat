@@ -47,5 +47,5 @@ void Harl::complain(std::string level) {
         }
     }
     
-    std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+    std::cout << "[ Hä? Mafhemtch! try \'DEBUG\' \'INFO\' \'WARNING\' \'ERROR\']" << std::endl;
 }

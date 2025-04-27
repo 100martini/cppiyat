@@ -70,6 +70,6 @@ void Harl::filter(std::string level) {
             this->error();
             break;
         default:
-            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+            std::cout << "[ Hä? Mafhemtch! try \'DEBUG\' \'INFO\' \'WARNING\' \'ERROR\']" << std::endl;
     }
 }
