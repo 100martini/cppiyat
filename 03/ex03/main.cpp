@@ -1,10 +1,11 @@
 #include "DiamondTrap.hpp"
 
 int main() {
-    DiamondTrap diamond("DT-00");
+    DiamondTrap diamond("DTA");
     
     std::cout << "\nDiamondTrap:" << std::endl;
-    diamond.attack("Diamond Enemy");
+    std::cout << "\nWhat happened to " << diamond.getName() << "?" << std::endl;
+    diamond.attack("DTE");
     diamond.takeDamage(30);
     diamond.beRepaired(15);
     diamond.guardGate();
