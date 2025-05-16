@@ -1,6 +1,9 @@
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
+#define PURPLE "\e[1;35m"
+#define RESET "\033[0m"
+
 #include <string>
 #include <iostream>
 
