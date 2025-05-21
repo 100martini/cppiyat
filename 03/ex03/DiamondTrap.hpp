@@ -1,8 +1,8 @@
 #ifndef DIAMONDTRAP_HPP
 #define DIAMONDTRAP_HPP
 
-#include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 class DiamondTrap : public ScavTrap, public FragTrap {
 private:
@@ -16,7 +16,7 @@ public:
     
     DiamondTrap& operator=(const DiamondTrap& other);
     
-    void whoAmI();
+    const void whoAmI() const;
     using ScavTrap::attack;
 };
 

@@ -1,6 +1,6 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap() : ClapTrap(), FragTrap(), ScavTrap() {
     std::cout << PURPLE "DiamondTrap default constructor called" RESET << std::endl;
     _name = "Default";
     ClapTrap::_name = _name + "_clap_name";
@@ -9,7 +9,7 @@ DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap() {
     _attackDamage = FragTrap::_attackDamage;
 }
 
-DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
+DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
     std::cout << PURPLE "DiamondTrap named constructor called for " << name << RESET << std::endl;
     _name = name;
     _hitPoints = FragTrap::_hitPoints;
@@ -17,7 +17,7 @@ DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name + "_clap_name"
     _attackDamage = FragTrap::_attackDamage;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), ScavTrap(other), FragTrap(other) {
+DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), FragTrap(other), ScavTrap(other) {
     std::cout << PURPLE "DiamondTrap copy constructor called" RESET << std::endl;
     *this = other;
 }

@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Basic Test (from subject)" << std::endl;
+    std::cout << "\e[1;35mtests dial subject:\033[0m" << std::endl;
     {
         IMateriaSource* src = new MateriaSource();
         src->learnMateria(new Ice());
@@ -31,9 +31,8 @@ int main() {
         delete src;
     }
 
-    std::cout << "\nAdditional Tests" << std::endl;
     {
-        std::cout << "\n----- Testing Deep Copy -----" << std::endl;
+        std::cout << "\n\e[1;35mDeep copy test:\033[0m" << std::endl;
         Character* original = new Character("original");
         
         AMateria* ice = new Ice();
@@ -68,7 +67,7 @@ int main() {
         delete clone;
     }
 
-    std::cout << "\n----- Testing MateriaSource -----" << std::endl;
+    std::cout << "\n\e[1;35mMateriaSource:\033[0m" << std::endl;
     {
         MateriaSource* src = new MateriaSource();
         
@@ -99,7 +98,7 @@ int main() {
         delete src;
     }
 
-    std::cout << "\n----- Testing Character Inventory -----" << std::endl;
+    std::cout << "\n\e[1;35mCharacter inventory:\033[0m" << std::endl;
     {
         Character* hero = new Character("Hero");
         

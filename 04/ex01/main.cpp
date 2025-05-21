@@ -5,14 +5,14 @@
 
 int main()
 {
-    std::cout << "SUBJECT TEST" << std::endl;
+    std::cout << "\e[1;35mtests dial subject:\033[0m" << std::endl;
     const Animal* j = new Dog();
     const Animal* i = new Cat();
     
     delete j;
     delete i;
     
-    std::cout << "\nARRAY OF ANIMALS TEST" << std::endl;
+    std::cout << "\n\e[1;35marrays:\033[0m" << std::endl;
     const int numAnimals = 10;
     Animal* animals[numAnimals];
     
@@ -26,10 +26,8 @@ int main()
     for (int k = 0; k < numAnimals; k++) {
         delete animals[k];
     }
-    
-    std::cout << "\nDEEP COPY TEST" << std::endl;
-    
-    std::cout << "\n--- Dog Deep Copy Test ---" << std::endl;
+        
+    std::cout << "\n\e[1;35mDog deep copy test:\033[0m" << std::endl;
     Dog* originalDog = new Dog();
 
     originalDog->getBrain()->setIdea(0, "I want to chase a ball");
@@ -48,7 +46,7 @@ int main()
     delete originalDog;
     delete copyDog;
     
-    std::cout << "\n--- Cat Deep Copy Test ---" << std::endl;
+    std::cout << "\n\e[1;35mCat deep copy test:\033[0m" << std::endl;
     Cat* originalCat = new Cat();
     originalCat->getBrain()->setIdea(0, "I want to sleep");
     originalCat->getBrain()->setIdea(1, "I don't care about humans");

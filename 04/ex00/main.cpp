@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::cout << "SUBJECT TEST" << std::endl;
+    std::cout << "\e[1;35mtests dial subject:\033[0m" << std::endl;
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
@@ -22,7 +22,7 @@ int main()
     delete j;
     delete i;
     
-    std::cout << "\nWRONG ANIMAL TEST" << std::endl;
+    std::cout << "\n\e[1;35mwrong_animal test:\033[0m" << std::endl;
     const WrongAnimal* wrongMeta = new WrongAnimal();
     const WrongAnimal* wrongCat = new WrongCat();
     
@@ -34,8 +34,8 @@ int main()
     delete wrongMeta;
     delete wrongCat;
     
-    std::cout << "\nADDITIONAL TESTS" << std::endl;
-    std::cout << "\nStack allocated objects:" << std::endl;
+    std::cout << "\n\e[1;35mADDITIONAL TESTS:\033[0m" << std::endl;
+    std::cout << "\n\e[1;35mStack allocated objects:\033[0m" << std::endl;
     Animal animal;
     Dog dog;
     Cat cat;
@@ -51,7 +51,7 @@ int main()
     std::cout << "Cat sound: ";
     cat.makeSound();
     
-    std::cout << "\nTesting copy constructor and assignment operator:" << std::endl;
+    std::cout << "\n\e[1;35mCopy constructor and assignment operator:\033[0m" << std::endl;
     Dog dog2 = dog;
     Cat cat2;
     cat2 = cat;

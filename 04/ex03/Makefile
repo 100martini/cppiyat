@@ -1,20 +1,21 @@
 NAME = I
 
-SRCS = $(wildcard *.cpp)
-
-OBJS = $(SRCS:.cpp=.o)
-
 CC = c++
-
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRC = $(wildcard *.cpp)
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

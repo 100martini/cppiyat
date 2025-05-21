@@ -17,7 +17,7 @@ int main()
     delete j;
     delete i;
     
-    std::cout << "\nARRAY OF ANIMALS TEST" << std::endl;
+    std::cout << "\n\e[1;35marrays:\033[0m" << std::endl;
     const int numAnimals = 4;
     AAnimal* animals[numAnimals];
     
@@ -36,10 +36,8 @@ int main()
     for (int k = 0; k < numAnimals; k++) {
         delete animals[k];
     }
-    
-    std::cout << "\nDEEP COPY TEST" << std::endl;
-    
-    std::cout << "\n--- Dog Deep Copy Test ---" << std::endl;
+        
+    std::cout << "\n\e[1;35mDog deep copy test:\033[0m" << std::endl;
     Dog* originalDog = new Dog();
     originalDog->getBrain()->setIdea(0, "I want to chase a ball");
     
