@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(LOWEST_GRADE) {
     //std::cout << "Bureaucrat default constructor called" << std::endl;
@@ -15,9 +15,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(oth
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    std::cout << "Bureaucrat assignment operator called" << std::endl;
+    //std::cout << "Bureaucrat assignment operator called" << std::endl;
     if (this != &other) {
-        // Note: _name is const, so we can only copy _grade
         _grade = other._grade;
     }
     return *this;
@@ -51,13 +50,23 @@ void Bureaucrat::decrementGrade() {
     std::cout << _name << "'s grade decremented to " << _grade << std::endl;
 }
 
-void Bureaucrat::signForm(Form& form) {
+void Bureaucrat::signForm(AForm& form) {
     try {
         form.beSigned(*this);
         std::cout << _name << " signed " << form.getName() << std::endl;
     }
     catch (std::exception& e) {
         std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(const AForm& form) {
+    try {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cout << _name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
     }
 }
 
