@@ -2,6 +2,7 @@
 
 Span::Span() : _maxSize(0)
 {
+	//std::cout << "Span default constructor called" << std::endl;
 }
 
 Span::Span(unsigned int N) : _maxSize(N)
@@ -10,10 +11,12 @@ Span::Span(unsigned int N) : _maxSize(N)
 
 Span::Span(const Span& other) : _maxSize(other._maxSize), _numbers(other._numbers)
 {
+	//std::cout << "Span copy constructor called" << std::endl;
 }
 
 Span& Span::operator=(const Span& other)
 {
+	//std::cout << "Span assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		_maxSize = other._maxSize;
@@ -24,6 +27,7 @@ Span& Span::operator=(const Span& other)
 
 Span::~Span()
 {
+	//std::cout << "Span destructor called" << std::endl;
 }
 
 void Span::addNumber(int number)
