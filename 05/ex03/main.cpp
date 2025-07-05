@@ -5,24 +5,36 @@ int main() {
     try {
         Intern someRandomIntern;
         Bureaucrat boss("Boss", 1);
-        AForm* form;
+        AForm* form = NULL;
 
         form = someRandomIntern.makeForm("robotomy request", "Bender");
-        boss.signForm(*form);
-        boss.executeForm(*form);
-        delete form;
+        if (form) {
+            boss.signForm(*form);
+            boss.executeForm(*form);
+            delete form;
+            form = NULL;
+        }
 
         form = someRandomIntern.makeForm("shrubbery creation", "home");
-        boss.signForm(*form);
-        boss.executeForm(*form);
-        delete form;
+        if (form) {
+            boss.signForm(*form);
+            boss.executeForm(*form);
+            delete form;
+            form = NULL;
+        }
 
         form = someRandomIntern.makeForm("presidential pardon", "Criminal");
-        boss.signForm(*form);
-        boss.executeForm(*form);
-        delete form;
+        if (form) {
+            boss.signForm(*form);
+            boss.executeForm(*form);
+            delete form;
+            form = NULL;
+        }
 
         form = someRandomIntern.makeForm("unknown form", "target");
+        if (form) {
+            delete form;
+        }
     }
     catch (std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;

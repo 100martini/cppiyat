@@ -15,7 +15,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(oth
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    std::cout << "Bureaucrat assignment operator called" << std::endl;
+    //std::cout << "Bureaucrat assignment operator called" << std::endl;
     if (this != &other) {
         // Note: _name is const, so we can only copy _grade
         _grade = other._grade;
@@ -36,7 +36,7 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-    if (_grade <= HIGHEST_GRADE) {
+    if (_grade == HIGHEST_GRADE) {
         throw GradeTooHighException();
     }
     _grade--;
@@ -44,7 +44,7 @@ void Bureaucrat::incrementGrade() {
 }
 
 void Bureaucrat::decrementGrade() {
-    if (_grade >= LOWEST_GRADE) {
+    if (_grade == LOWEST_GRADE) {
         throw GradeTooLowException();
     }
     _grade++;
@@ -54,10 +54,10 @@ void Bureaucrat::decrementGrade() {
 void Bureaucrat::signForm(Form& form) {
     try {
         form.beSigned(*this);
-        std::cout << _name << " signed " << form.getName() << std::endl;
+        std::cout << _name << " signs " << form.getName() << std::endl;
     }
     catch (std::exception& e) {
-        std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+        std::cout << _name << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
     }
 }
 

@@ -39,7 +39,8 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
         }
     }
     
-    throw FormNotFoundException();
+    std::cout << "Error: Form \"" << formName << "\" is not known!" << std::endl;
+    return NULL;
 }
 
 AForm* Intern::createShrubberyCreationForm(const std::string& target) {
@@ -52,8 +53,4 @@ AForm* Intern::createRobotomyRequestForm(const std::string& target) {
 
 AForm* Intern::createPresidentialPardonForm(const std::string& target) {
     return new PresidentialPardonForm(target);
-}
-
-const char* Intern::FormNotFoundException::what() const throw() {
-    return "Form not found!";
 }

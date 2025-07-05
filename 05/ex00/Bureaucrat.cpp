@@ -33,21 +33,19 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-    if (_grade <= HIGHEST_GRADE)
+    if (_grade == HIGHEST_GRADE)
         throw GradeTooHighException();
     _grade--;
     std::cout << _name << "'s grade incremented to " << _grade << std::endl;
 }
 
 void Bureaucrat::decrementGrade() {
-    if (_grade >= LOWEST_GRADE) {
+    if (_grade == LOWEST_GRADE) {
         throw GradeTooLowException();
     }
     _grade++;
     std::cout << _name << "'s grade decremented to " << _grade << std::endl;
 }
-
-// Private methods
 
 void Bureaucrat::validateGrade(int grade) const {
     if (grade < HIGHEST_GRADE) {
