@@ -6,7 +6,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) 
     : AForm("RobotomyRequestForm", 72, 45), _target(target) {
-    //std::cout << "RobotomyRequestForm parametric constructor called" << std::endl;
+    //std::cout << "RobotomyRequestForm constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) 
@@ -18,25 +18,27 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
     //std::cout << "RobotomyRequestForm assignment operator called" << std::endl;
     if (this != &other) {
         AForm::operator=(other);
+        _target = other._target;
     }
     return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-    //std::cout << "RobotomyRequestForm destroyed" << std::endl;
-}
-
-const std::string& RobotomyRequestForm::getTarget() const {
-    return _target;
+    //std::cout << "RobotomyRequestForm destructor called" << std::endl;
 }
 
 void RobotomyRequestForm::executeAction() const {
-    std::cout << "BZZZZT! WHIRRR! *drilling noises*" << std::endl;
+    std::cout << "BZZZZZZT! DRILL DRILL DRILL!" << std::endl;
     
-    srand(time(NULL));
-    if (rand() % 2) {
+    static bool seeded = false;
+    if (!seeded) {
+        std::srand(std::time(NULL));
+        seeded = true;
+    }
+    
+    if (std::rand() % 2) {
         std::cout << _target << " has been robotomized successfully!" << std::endl;
     } else {
-        std::cout << "The robotomy of " << _target << " failed!" << std::endl;
+        std::cout << "Robotomy of " << _target << " failed!" << std::endl;
     }
 }

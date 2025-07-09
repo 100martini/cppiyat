@@ -19,10 +19,22 @@ Intern::~Intern() {
     //std::cout << "Intern destructor called" << std::endl;
 }
 
+AForm* Intern::createShrubberyCreationForm(const std::string& target) const {
+    return new ShrubberyCreationForm(target);
+}
+
+AForm* Intern::createRobotomyRequestForm(const std::string& target) const {
+    return new RobotomyRequestForm(target);
+}
+
+AForm* Intern::createPresidentialPardonForm(const std::string& target) const {
+    return new PresidentialPardonForm(target);
+}
+
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) {
     std::string formNames[] = {
         "shrubbery creation",
-        "robotomy request", 
+        "robotomy request",
         "presidential pardon"
     };
     
@@ -41,16 +53,4 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
     
     std::cout << "Error: Form \"" << formName << "\" is not known!" << std::endl;
     return NULL;
-}
-
-AForm* Intern::createShrubberyCreationForm(const std::string& target) {
-    return new ShrubberyCreationForm(target);
-}
-
-AForm* Intern::createRobotomyRequestForm(const std::string& target) {
-    return new RobotomyRequestForm(target);
-}
-
-AForm* Intern::createPresidentialPardonForm(const std::string& target) {
-    return new PresidentialPardonForm(target);
 }

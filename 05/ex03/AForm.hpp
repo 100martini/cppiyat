@@ -14,6 +14,11 @@ private:
     const int _gradeToSign;
     const int _gradeToExecute;
 
+    static const int HIGHEST_GRADE = 1;
+    static const int LOWEST_GRADE = 150;
+
+    void validateGrade(int grade) const;
+
 public:
     AForm();
     AForm(const std::string& name, int gradeToSign, int gradeToExecute);
@@ -45,12 +50,6 @@ public:
     public:
         virtual const char* what() const throw();
     };
-
-    static const int HIGHEST_GRADE = 1;
-    static const int LOWEST_GRADE = 150;
-
-private:
-    void validateGrade(int grade) const;
 };
 
 std::ostream& operator<<(std::ostream& out, const AForm& form);

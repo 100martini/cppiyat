@@ -6,7 +6,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
     : AForm("ShrubberyCreationForm", 145, 137), _target(target) {
-    //std::cout << "ShrubberyCreationForm parametric constructor called" << std::endl;
+    //std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) 
@@ -18,16 +18,13 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     //std::cout << "ShrubberyCreationForm assignment operator called" << std::endl;
     if (this != &other) {
         AForm::operator=(other);
+        _target = other._target;
     }
     return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-    //std::cout << "ShrubberyCreationForm destroyed" << std::endl;
-}
-
-const std::string& ShrubberyCreationForm::getTarget() const {
-    return _target;
+    //std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
 
 void ShrubberyCreationForm::executeAction() const {
@@ -38,27 +35,23 @@ void ShrubberyCreationForm::executeAction() const {
         throw FileWriteException();
     }
     
-    file << "       _-_\n";
-    file << "    /~~   ~~\\\n";
-    file << " /~~         ~~\\\n";
-    file << "{               }\n";
-    file << " \\  _-     -_  /\n";
-    file << "   ~  \\\\ //  ~\n";
-    file << "_- -   | | _- _\n";
-    file << "  _ -  | |   -_\n";
-    file << "      // \\\\\n";
-    file << "\n";
-    file << "     _-_-_\n";
-    file << "  /~     ~\\\n";
-    file << " |  () () |\n";
-    file << "  \\   ^   /\n";
-    file << "   ||||||\n";
-    file << "   ||||||\n";
+    file << "       _-_" << std::endl;
+    file << "    /~~   ~~\\" << std::endl;
+    file << " /~~         ~~\\" << std::endl;
+    file << "{               }" << std::endl;
+    file << " \\  _-     -_  /" << std::endl;
+    file << "   ~  \\\\ //  ~" << std::endl;
+    file << "_- -   | | _- _" << std::endl;
+    file << "  _ -  | |   -_" << std::endl;
+    file << "      // \\\\" << std::endl;
+    file << "     //   \\\\" << std::endl;
+    file << "    //     \\\\" << std::endl;
+    file << "   //       \\\\" << std::endl;
+    file << "  //         \\\\" << std::endl;
+    file << " //           \\\\" << std::endl;
     
     file.close();
-    std::cout << "ASCII trees written to " << filename << std::endl;
 }
 
 const char* ShrubberyCreationForm::FileWriteException::what() const throw() {
-    return "Could not create or write to file!";
-}
+    return "could not create file!";

@@ -9,8 +9,7 @@ AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute)
     : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     validateGrade(gradeToSign);
     validateGrade(gradeToExecute);
-    std::cout << "AForm " << _name << " created (sign: " << _gradeToSign 
-              << ", exec: " << _gradeToExecute << ")" << std::endl;
+    //std::cout << "AForm constructor called" << std::endl;
 }
 
 AForm::AForm(const AForm& other) 
@@ -21,13 +20,14 @@ AForm::AForm(const AForm& other)
 AForm& AForm::operator=(const AForm& other) {
     //std::cout << "AForm assignment operator called" << std::endl;
     if (this != &other) {
+        // Note: _name, _gradeToSign, and _gradeToExecute are const and cannot be changed
         _signed = other._signed;
     }
     return *this;
 }
 
 AForm::~AForm() {
-    //std::cout << "AForm " << _name << " destroyed" << std::endl;
+    //std::cout << "AForm destructor called" << std::endl;
 }
 
 const std::string& AForm::getName() const {
@@ -51,7 +51,6 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
         throw GradeTooLowException();
     }
     _signed = true;
-    std::cout << "AForm " << _name << " has been signed by " << bureaucrat.getName() << std::endl;
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
@@ -86,7 +85,7 @@ const char* AForm::FormNotSignedException::what() const throw() {
 }
 
 std::ostream& operator<<(std::ostream& out, const AForm& form) {
-    out << "AForm " << form.getName() << " (signed: " << (form.getSigned() ? "yes" : "no")
+    out << "Form " << form.getName() << " (signed: " << (form.getSigned() ? "yes" : "no")
         << ", grade to sign: " << form.getGradeToSign()
         << ", grade to execute: " << form.getGradeToExecute() << ")";
     return out;

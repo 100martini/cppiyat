@@ -6,7 +6,7 @@
 
 class ShrubberyCreationForm : public AForm {
 private:
-    const std::string _target;
+    std::string _target;
 
 public:
     ShrubberyCreationForm();
@@ -15,7 +15,6 @@ public:
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
     virtual ~ShrubberyCreationForm();
 
-    const std::string& getTarget() const;
     virtual void executeAction() const;
 
     class FileWriteException : public std::exception {

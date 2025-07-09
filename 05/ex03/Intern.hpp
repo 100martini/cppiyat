@@ -7,6 +7,13 @@
 #include "PresidentialPardonForm.hpp"
 
 class Intern {
+private:
+    typedef AForm* (Intern::*FormCreator)(const std::string& target) const;
+
+    AForm* createShrubberyCreationForm(const std::string& target) const;
+    AForm* createRobotomyRequestForm(const std::string& target) const;
+    AForm* createPresidentialPardonForm(const std::string& target) const;
+
 public:
     Intern();
     Intern(const Intern& other);
@@ -14,13 +21,6 @@ public:
     ~Intern();
 
     AForm* makeForm(const std::string& formName, const std::string& target);
-
-private:
-    typedef AForm* (Intern::*FormCreator)(const std::string& target);
-    
-    AForm* createShrubberyCreationForm(const std::string& target);
-    AForm* createRobotomyRequestForm(const std::string& target);
-    AForm* createPresidentialPardonForm(const std::string& target);
 };
 
 #endif

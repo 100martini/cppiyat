@@ -9,8 +9,7 @@ Form::Form(const std::string& name, int gradeToSign, int gradeToExecute)
     : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     validateGrade(gradeToSign);
     validateGrade(gradeToExecute);
-    std::cout << "Form " << _name << " created (sign: " << _gradeToSign 
-              << ", exec: " << _gradeToExecute << ")" << std::endl;
+    //std::cout << "Form constructor called" << std::endl;
 }
 
 Form::Form(const Form& other) 
@@ -19,16 +18,16 @@ Form::Form(const Form& other)
 }
 
 Form& Form::operator=(const Form& other) {
-    std::cout << "Form assignment operator called" << std::endl;
+    //std::cout << "Form assignment operator called" << std::endl;
     if (this != &other) {
-        // Note: _name, _gradeToSign, and _gradeToExecute are const, so we can only copy _signed
+        //Note: _name, _gradeToSign, and _gradeToExecute are const and cannot be changed
         _signed = other._signed;
     }
     return *this;
 }
 
 Form::~Form() {
-    //std::cout << "Form " << _name << " destroyed" << std::endl;
+    //std::cout << "Form destructor called" << std::endl;
 }
 
 const std::string& Form::getName() const {
@@ -52,7 +51,6 @@ void Form::beSigned(const Bureaucrat& bureaucrat) {
         throw GradeTooLowException();
     }
     _signed = true;
-    std::cout << "Form " << _name << " has been signed by " << bureaucrat.getName() << std::endl;
 }
 
 void Form::validateGrade(int grade) const {

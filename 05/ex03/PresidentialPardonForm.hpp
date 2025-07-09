@@ -5,7 +5,7 @@
 
 class PresidentialPardonForm : public AForm {
 private:
-    const std::string _target;
+    std::string _target;
 
 public:
     PresidentialPardonForm();
@@ -14,7 +14,6 @@ public:
     PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
     virtual ~PresidentialPardonForm();
 
-    const std::string& getTarget() const;
     virtual void executeAction() const;
 };
 
