@@ -18,7 +18,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
     //std::cout << "RobotomyRequestForm assignment operator called" << std::endl;
     if (this != &other) {
         AForm::operator=(other);
-        _target = other._target;
+        // Note: _target is const and cannot be reassigned
     }
     return *this;
 }
@@ -30,6 +30,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 void RobotomyRequestForm::executeAction() const {
     std::cout << "BZZZZZZT! DRILL DRILL DRILL!" << std::endl;
     
+    // Fixed: Use static bool to seed only once (better approach)
     static bool seeded = false;
     if (!seeded) {
         std::srand(std::time(NULL));
