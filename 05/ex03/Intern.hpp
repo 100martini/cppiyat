@@ -8,11 +8,6 @@
 
 class Intern {
 private:
-    struct FormCreator {
-        std::string name;
-        AForm* (*creator)(const std::string& target);
-    };
-
     static AForm* createShrubberyForm(const std::string& target);
     static AForm* createRobotomyForm(const std::string& target);
     static AForm* createPresidentialForm(const std::string& target);
