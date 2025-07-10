@@ -2,20 +2,16 @@
 #include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(LOWEST_GRADE) {
-    //std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade) {
     validateGrade(grade);
-    //std::cout << "Bureaucrat constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
-    //std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    //std::cout << "Bureaucrat assignment operator called" << std::endl;
     if (this != &other) {
         // Note: _name is const and cannot be changed after construction
         _grade = other._grade;
@@ -24,7 +20,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 }
 
 Bureaucrat::~Bureaucrat() {
-    //std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
 const std::string& Bureaucrat::getName() const {
@@ -36,14 +31,14 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-    if (_grade <= HIGHEST_GRADE) {
+    if (_grade == HIGHEST_GRADE) {
         throw GradeTooHighException();
     }
     _grade--;
 }
 
 void Bureaucrat::decrementGrade() {
-    if (_grade >= LOWEST_GRADE) {
+    if (_grade == LOWEST_GRADE) {
         throw GradeTooLowException();
     }
     _grade++;
