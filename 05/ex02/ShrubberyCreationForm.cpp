@@ -55,3 +55,4 @@ void ShrubberyCreationForm::executeAction() const {
 
 const char* ShrubberyCreationForm::FileWriteException::what() const throw() {
     return "could not create file!";
+}
