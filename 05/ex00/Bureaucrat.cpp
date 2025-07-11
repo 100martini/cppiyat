@@ -11,9 +11,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(oth
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    if (this != &other) {
+    if (this != &other)
         _grade = other._grade;
-    }
     return *this;
 }
 
@@ -29,26 +28,22 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-    if (_grade == HIGHEST_GRADE) {
+    if (_grade == HIGHEST_GRADE)
         throw GradeTooHighException();
-    }
     _grade--;
 }
 
 void Bureaucrat::decrementGrade() {
-    if (_grade == LOWEST_GRADE) {
+    if (_grade == LOWEST_GRADE)
         throw GradeTooLowException();
-    }
     _grade++;
 }
 
 void Bureaucrat::validateGrade(int grade) const {
-    if (grade < HIGHEST_GRADE) {
+    if (grade < HIGHEST_GRADE)
         throw GradeTooHighException();
-    }
-    if (grade > LOWEST_GRADE) {
+    if (grade > LOWEST_GRADE)
         throw GradeTooLowException();
-    }
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {

@@ -3,18 +3,19 @@
 
 int main() {
     try {
-        Bureaucrat john("John", 50);
-        Form taxForm("Tax Form", 75, 25);
-        std::cout << john << std::endl;
-        std::cout << taxForm << std::endl;
-        john.signForm(taxForm);
-        std::cout << taxForm << std::endl;
-        
-        Form importantForm("Important Form", 1, 1);
-        john.signForm(importantForm);
+        Bureaucrat martini("Martini", 50);
+        Form taxForm("tax", 75, 25);
+        std::cout << martini << std::endl;
+        std::cout << taxForm << '\n' << std::endl;
+        martini.signForm(taxForm);
+        std::cout << taxForm << '\n' << std::endl;
+         
+        Form importantForm("important", 1, 1);
+        martini.signForm(importantForm);
+        std::cout << importantForm << std::endl;
     }
     catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cout << "excep: " << e.what() << std::endl;
     }
     return 0;
 }

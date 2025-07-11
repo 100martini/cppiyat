@@ -2,15 +2,15 @@
 
 int main() {
     try {
-        Bureaucrat john("John", 75);
-        std::cout << john << std::endl;
-        john.incrementGrade();
-        std::cout << john << std::endl;
-        
-        Bureaucrat invalid("Invalid", 0);
+        Bureaucrat martini("Martini", 3);
+        std::cout << martini << std::endl;
+        martini.incrementGrade();
+        std::cout << martini << std::endl;
+
+        Bureaucrat invalid("pasvalide", 151);
     }
     catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cout << "excep: " << e.what() << std::endl;
     }
     return 0;
 }
