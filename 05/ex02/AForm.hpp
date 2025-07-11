@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#define GREEN "\e[0;32m"
+#define RESET "\033[0m"
 
 class Bureaucrat;
 

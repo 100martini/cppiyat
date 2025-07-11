@@ -23,7 +23,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 }
 
 void RobotomyRequestForm::executeAction() const {
-    std::cout << "BZZZZZZT! DRILL DRILL DRILL!" << std::endl;
+    std::cout << "DRILL DRILL DRILL!" << std::endl;
     
     static bool seeded = false;
     if (!seeded) {
