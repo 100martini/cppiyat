@@ -20,7 +20,6 @@ Form::Form(const Form& other)
 Form& Form::operator=(const Form& other) {
     //std::cout << "Form assignment operator called" << std::endl;
     if (this != &other) {
-        //Note: _name, _gradeToSign, and _gradeToExecute are const and cannot be changed
         _signed = other._signed;
     }
     return *this;
