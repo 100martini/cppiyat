@@ -8,12 +8,12 @@ int main() {
         Bureaucrat martini("Martini", 1);
         AForm* rrf;
 
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        rrf = someRandomIntern.makeForm("robotomy request", "Wall-E");
         martini.signForm(*rrf);
         martini.executeForm(*rrf);
         delete rrf;
 
-        rrf = someRandomIntern.makeForm("unknown form", "target");
+        rrf = someRandomIntern.makeForm("unknown", "target");
     }
     catch (std::exception& e) {
         std::cout << "excep: " << e.what() << std::endl;
