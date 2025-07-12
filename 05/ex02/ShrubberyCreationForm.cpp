@@ -31,9 +31,8 @@ void ShrubberyCreationForm::executeAction() const {
     std::string filename = _target + "_shrubbery";
     std::ofstream file(filename.c_str());
     
-    if (!file.is_open()) {
+    if (!file.is_open())
         throw FileWriteException();
-    }
     
     file << "       _-_" << std::endl;
     file << "    /~~   ~~\\" << std::endl;

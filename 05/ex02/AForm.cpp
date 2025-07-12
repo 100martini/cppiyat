@@ -19,9 +19,8 @@ AForm::AForm(const AForm& other)
 
 AForm& AForm::operator=(const AForm& other) {
     //std::cout << "AForm assignment operator called" << std::endl;
-    if (this != &other) {
+    if (this != &other)
         _signed = other._signed;
-    }
     return *this;
 }
 
@@ -46,29 +45,24 @@ int AForm::getGradeToExecute() const {
 }
 
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
-    if (bureaucrat.getGrade() > _gradeToSign) {
+    if (bureaucrat.getGrade() > _gradeToSign)
         throw GradeTooLowException();
-    }
     _signed = true;
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
-    if (!_signed) {
+    if (!_signed)
         throw FormNotSignedException();
-    }
-    if (executor.getGrade() > _gradeToExecute) {
+    if (executor.getGrade() > _gradeToExecute)
         throw GradeTooLowException();
-    }
     executeAction();
 }
 
 void AForm::validateGrade(int grade) const {
-    if (grade < HIGHEST_GRADE) {
+    if (grade < HIGHEST_GRADE)
         throw GradeTooHighException();
-    }
-    if (grade > LOWEST_GRADE) {
+    if (grade > LOWEST_GRADE)
         throw GradeTooLowException();
-    }
 }
 
 const char* AForm::GradeTooHighException::what() const throw() {

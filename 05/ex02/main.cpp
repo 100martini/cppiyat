@@ -39,7 +39,7 @@ int main() {
 
     }
     catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cout << "excep: " << e.what() << std::endl;
     }
     return 0;
 }

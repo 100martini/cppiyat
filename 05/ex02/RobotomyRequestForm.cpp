@@ -31,9 +31,8 @@ void RobotomyRequestForm::executeAction() const {
         seeded = true;
     }
     
-    if (std::rand() % 2) {
+    if (std::rand() % 2)
         std::cout << _target << " has been robotomized successfully!" << std::endl;
-    } else {
+    else
         std::cout << "Robotomy of " << _target << " failed!" << std::endl;
-    }
 }
