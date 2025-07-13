@@ -106,37 +106,30 @@ bool ScalarConverter::isInRange(double value, double min, double max) {
     return (value >= min && value <= max);
 }
 
-// In ScalarConverter::detectType(), you could add more robust validation:
-
 int ScalarConverter::detectType(const std::string& literal) {
     if (literal.empty())
         return INVALID;
-        
+    
     if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
         return CHAR;
     
-    if (literal == "-inff" || literal == "+inff" || literal == "nanf")
+    if (literal == "-inff" || literal == "+inff" || literal == "nanf" || 
+        (literal.find('.') != std::string::npos && literal[literal.length() - 1] == 'f'))
         return FLOAT;
     
-    if (literal == "-inf" || literal == "+inf" || literal == "nan")
-        return DOUBLE;
-    
-    if (literal[literal.length() - 1] == 'f' && literal.find('.') != std::string::npos) {
-        return FLOAT;
-    }
-    
-    if (literal.find('.') != std::string::npos)
+    if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
+        literal.find('.') != std::string::npos)
         return DOUBLE;
     
     size_t start = 0;
-    if (literal[0] == '+' || literal[0] == '-') {
-        if (literal.length() == 1)
-            return INVALID;
+    if (literal.length() > 0 && (literal[0] == '+' || literal[0] == '-'))
         start = 1;
-    }
+    
+    if (start == 1 && literal.length() == 1)
+        return INVALID;
     
     for (size_t i = start; i < literal.length(); i++) {
-        if (!isdigit(literal[i]))
+        if (!std::isdigit(literal[i]))
             return INVALID;
     }
     

@@ -9,6 +9,7 @@
 #include <cfloat>
 #include <cstdlib>
 #include <cerrno>
+#include <cctype>
 #define RED "\e[0;31m"
 #define RESET "\033[0m"
 
