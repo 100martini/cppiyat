@@ -9,6 +9,7 @@
 #include <cfloat>
 #include <cstdlib>
 #include <cctype>
+#include <cerrno>
 
 class ScalarConverter {
 private:
@@ -18,6 +19,8 @@ private:
     ~ScalarConverter();
 
     static int detectType(const std::string& literal);
+    static bool isValidInt(const std::string& literal);
+    static bool isValidDouble(const std::string& literal);
     static void printChar(double value);
     static void printInt(double value);
     static void printFloat(double value);

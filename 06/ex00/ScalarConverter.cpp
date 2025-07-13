@@ -26,6 +26,9 @@ int ScalarConverter::detectType(const std::string& literal) {
     if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
         return CHAR;
     
+    if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
+        return DOUBLE;
+    
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" || 
         (literal.find('.') != std::string::npos && literal[literal.length() - 1] == 'f'))
         return FLOAT;
@@ -46,7 +49,32 @@ int ScalarConverter::detectType(const std::string& literal) {
             return INVALID;
     }
     
+    if (!isValidInt(literal))
+        return DOUBLE;
+    
     return INT;
+}
+
+bool ScalarConverter::isValidInt(const std::string& literal) {
+    errno = 0;
+    char* endptr;
+    long value = strtol(literal.c_str(), &endptr, 10);
+    
+    if (errno == ERANGE || *endptr != '\0' || value < INT_MIN || value > INT_MAX) {
+        return false;
+    }
+    return true;
+}
+
+bool ScalarConverter::isValidDouble(const std::string& literal) {
+    errno = 0;
+    char* endptr;
+    strtod(literal.c_str(), &endptr);
+    
+    if (*endptr != '\0' && literal != "-inf" && literal != "+inf" && literal != "nan") {
+        return false;
+    }
+    return true;
 }
 
 void ScalarConverter::printChar(double value) {
@@ -71,6 +99,13 @@ void ScalarConverter::printInt(double value) {
 
 void ScalarConverter::printFloat(double value) {
     std::cout << "float: ";
+    
+    if (!std::isnan(value) && !std::isinf(value) && 
+        (value > FLT_MAX || value < -FLT_MAX)) {
+        std::cout << "impossible" << std::endl;
+        return;
+    }
+    
     float f = static_cast<float>(value);
     if (std::isnan(f)) {
         std::cout << "nanf" << std::endl;
@@ -116,9 +151,17 @@ void ScalarConverter::convert(const std::string& literal) {
             value = static_cast<double>(atoi(literal.c_str()));
             break;
         case FLOAT:
+            if (!isValidDouble(literal)) {
+                std::cout << "error: invalid float format!" << std::endl;
+                return;
+            }
             value = static_cast<double>(atof(literal.c_str()));
             break;
         case DOUBLE:
+            if (!isValidDouble(literal)) {
+                std::cout << "error: invalid double format!" << std::endl;
+                return;
+            }
             value = atof(literal.c_str());
             break;
         default:
