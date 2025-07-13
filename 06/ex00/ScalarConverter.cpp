@@ -36,6 +36,18 @@ int ScalarConverter::detectType(const std::string& literal) {
         std::string without_f = literal.substr(0, literal.length() - 1);
         size_t dot_pos = without_f.find('.');
         if (dot_pos != std::string::npos && without_f.find('.', dot_pos + 1) == std::string::npos) {
+            if (dot_pos == 0 || dot_pos == without_f.length() - 1)
+                return INVALID;
+            size_t start = 0;
+            if (without_f[0] == '+' || without_f[0] == '-') {
+                if (without_f.length() <= 2 || dot_pos == 1)
+                    return INVALID;
+                start = 1;
+            }
+            for (size_t i = start; i < without_f.length(); i++) {
+                if (i != dot_pos && !isdigit(without_f[i]))
+                    return INVALID;
+            }
             return FLOAT;
         }
         return INVALID;
@@ -44,6 +56,18 @@ int ScalarConverter::detectType(const std::string& literal) {
     if (literal.find('.') != std::string::npos) {
         size_t dot_pos = literal.find('.');
         if (literal.find('.', dot_pos + 1) == std::string::npos) {
+            if (dot_pos == 0 || dot_pos == literal.length() - 1)
+                return INVALID;
+            size_t start = 0;
+            if (literal[0] == '+' || literal[0] == '-') {
+                if (literal.length() <= 2 || dot_pos == 1)
+                    return INVALID;
+                start = 1;
+            }
+            for (size_t i = start; i < literal.length(); i++) {
+                if (i != dot_pos && !isdigit(literal[i]))
+                    return INVALID;
+            }
             return DOUBLE;
         }
         return INVALID;
