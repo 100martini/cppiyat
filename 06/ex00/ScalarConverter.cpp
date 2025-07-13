@@ -20,21 +20,41 @@ ScalarConverter::~ScalarConverter() {
 }
 
 int ScalarConverter::detectType(const std::string& literal) {
+    if (literal.empty())
+        return INVALID;
+        
     if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
         return CHAR;
     
-    if (literal == "-inff" || literal == "+inff" || literal == "nanf" || 
-        (literal.find('.') != std::string::npos && literal[literal.length() - 1] == 'f'))
+    if (literal == "-inff" || literal == "+inff" || literal == "nanf")
         return FLOAT;
-    
-    if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
-        literal.find('.') != std::string::npos)
+        
+    if (literal == "-inf" || literal == "+inf" || literal == "nan")
         return DOUBLE;
     
-    // Check if it's a valid integer
+    if (literal.length() > 1 && literal[literal.length() - 1] == 'f') {
+        std::string without_f = literal.substr(0, literal.length() - 1);
+        size_t dot_pos = without_f.find('.');
+        if (dot_pos != std::string::npos && without_f.find('.', dot_pos + 1) == std::string::npos) {
+            return FLOAT;
+        }
+        return INVALID;
+    }
+    
+    if (literal.find('.') != std::string::npos) {
+        size_t dot_pos = literal.find('.');
+        if (literal.find('.', dot_pos + 1) == std::string::npos) {
+            return DOUBLE;
+        }
+        return INVALID;
+    }
+    
     size_t start = 0;
-    if (literal[0] == '+' || literal[0] == '-')
+    if (literal[0] == '+' || literal[0] == '-') {
+        if (literal.length() == 1)
+            return INVALID;
         start = 1;
+    }
     
     for (size_t i = start; i < literal.length(); i++) {
         if (!isdigit(literal[i]))

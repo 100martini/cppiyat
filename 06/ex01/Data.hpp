@@ -2,6 +2,10 @@
 #define DATA_HPP
 
 #include <string>
+#define RED "\e[0;31m"
+#define GREEN "\e[0;32m"
+#define PURPLE "\e[1;35m"
+#define RESET "\033[0m"
 
 struct Data {
     int id;

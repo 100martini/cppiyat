@@ -3,9 +3,9 @@
 #include "Data.hpp"
 
 int main() {
-    Data originalData(42, "Test Data", 3.14);
+    Data originalData(42, "test", 3.14);
     
-    std::cout << "Original Data:" << std::endl;
+    std::cout << PURPLE << "OG data:" << RESET << std::endl;
     std::cout << "ID: " << originalData.id << std::endl;
     std::cout << "Name: " << originalData.name << std::endl;
     std::cout << "Value: " << originalData.value << std::endl;
@@ -18,7 +18,7 @@ int main() {
     
     Data* deserializedPtr = Serializer::deserialize(serialized);
     
-    std::cout << "Deserialized Data:" << std::endl;
+    std::cout << PURPLE << "Deserialized:" << RESET << std::endl;
     std::cout << "ID: " << deserializedPtr->id << std::endl;
     std::cout << "Name: " << deserializedPtr->name << std::endl;
     std::cout << "Value: " << deserializedPtr->value << std::endl;
@@ -26,9 +26,9 @@ int main() {
     std::cout << std::endl;
     
     if (deserializedPtr == &originalData) {
-        std::cout << "Success: Deserialized pointer equals original pointer <3" << std::endl;
+        std::cout << GREEN << "succes: deserialized pointer equals original pointer <3" << RESET << std::endl;
     } else {
-        std::cout << "Error: Pointers don't match!" << std::endl;
+        std::cout << RED << "error: pointers don't match!" << RESET << std::endl;
     }
     
     return 0;

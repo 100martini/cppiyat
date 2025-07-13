@@ -6,13 +6,13 @@ int main() {
     for (int i = 0; i < 6; i++) {
         Base* obj = generate();
         
-        std::cout << (i + 1) << ":" << std::endl;
-        std::cout << "Object address: " << obj << std::endl;
+        std::cout << PURPLE << (i + 1) << ":" << RESET << std::endl;
+        std::cout << "object address: " << obj << std::endl;
         
-        std::cout << "Identify by pointer: ";
+        std::cout << "identify by pointer: ";
         identify(obj);
         
-        std::cout << "Identify by reference: ";
+        std::cout << "identify by reference: ";
         identify(*obj);
         
         delete obj;
