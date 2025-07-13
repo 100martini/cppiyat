@@ -1,18 +1,22 @@
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter() {
+    //std::cout << "ScalarConverter default constructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other) {
+    //std::cout << "ScalarConverter copy constructor called" << std::endl;
     (void)other;
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
+    //std::cout << "ScalarConverter assignment operator called" << std::endl;
     (void)other;
     return *this;
 }
 
 ScalarConverter::~ScalarConverter() {
+    //std::cout << "ScalarConverter destructor called" << std::endl;
 }
 
 int ScalarConverter::detectType(const std::string& literal) {
