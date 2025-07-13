@@ -8,10 +8,7 @@
 #include <climits>
 #include <cfloat>
 #include <cstdlib>
-#include <cerrno>
 #include <cctype>
-#define RED "\e[0;31m"
-#define RESET "\033[0m"
 
 class ScalarConverter {
 private:
@@ -21,11 +18,6 @@ private:
     ~ScalarConverter();
 
     static int detectType(const std::string& literal);
-    static bool isValidChar(const std::string& literal);
-    static bool isValidInt(const std::string& literal);
-    static bool isValidFloat(const std::string& literal);
-    static bool isValidDouble(const std::string& literal);
-    static bool isInRange(double value, double min, double max);
     static void printChar(double value);
     static void printInt(double value);
     static void printFloat(double value);
