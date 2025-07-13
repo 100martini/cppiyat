@@ -122,14 +122,14 @@ int ScalarConverter::detectType(const std::string& literal) {
         return DOUBLE;
     
     size_t start = 0;
-    if (literal.length() > 0 && (literal[0] == '+' || literal[0] == '-'))
+    if (literal[0] == '+' || literal[0] == '-') {
+        if (literal.length() == 1)
+            return INVALID;
         start = 1;
-    
-    if (start == 1 && literal.length() == 1)
-        return INVALID;
+    }
     
     for (size_t i = start; i < literal.length(); i++) {
-        if (!std::isdigit(literal[i]))
+        if (!isdigit(literal[i]))
             return INVALID;
     }
     
