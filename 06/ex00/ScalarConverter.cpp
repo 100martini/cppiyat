@@ -106,23 +106,41 @@ bool ScalarConverter::isInRange(double value, double min, double max) {
     return (value >= min && value <= max);
 }
 
+// In ScalarConverter::detectType(), you could add more robust validation:
+
 int ScalarConverter::detectType(const std::string& literal) {
     if (literal.empty())
         return INVALID;
-    
-    if (isValidChar(literal))
+        
+    if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
         return CHAR;
     
-    if (isValidFloat(literal))
+    if (literal == "-inff" || literal == "+inff" || literal == "nanf")
         return FLOAT;
     
-    if (isValidDouble(literal))
+    if (literal == "-inf" || literal == "+inf" || literal == "nan")
         return DOUBLE;
     
-    if (isValidInt(literal))
-        return INT;
+    if (literal[literal.length() - 1] == 'f' && literal.find('.') != std::string::npos) {
+        return FLOAT;
+    }
     
-    return INVALID;
+    if (literal.find('.') != std::string::npos)
+        return DOUBLE;
+    
+    size_t start = 0;
+    if (literal[0] == '+' || literal[0] == '-') {
+        if (literal.length() == 1)
+            return INVALID;
+        start = 1;
+    }
+    
+    for (size_t i = start; i < literal.length(); i++) {
+        if (!isdigit(literal[i]))
+            return INVALID;
+    }
+    
+    return INT;
 }
 
 void ScalarConverter::printChar(double value) {
