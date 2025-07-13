@@ -19,78 +19,115 @@ ScalarConverter::~ScalarConverter() {
     //std::cout << "ScalarConverter destructor called" << std::endl;
 }
 
-int ScalarConverter::detectType(const std::string& literal) {
+bool ScalarConverter::isValidChar(const std::string& literal) {
+    return (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'' && 
+            literal[1] >= 32 && literal[1] <= 126);
+}
+
+bool ScalarConverter::isValidInt(const std::string& literal) {
     if (literal.empty())
-        return INVALID;
-        
-    if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
-        return CHAR;
-    
-    if (literal == "-inff" || literal == "+inff" || literal == "nanf")
-        return FLOAT;
-        
-    if (literal == "-inf" || literal == "+inf" || literal == "nan")
-        return DOUBLE;
-    
-    if (literal.length() > 1 && literal[literal.length() - 1] == 'f') {
-        std::string without_f = literal.substr(0, literal.length() - 1);
-        size_t dot_pos = without_f.find('.');
-        if (dot_pos != std::string::npos && without_f.find('.', dot_pos + 1) == std::string::npos) {
-            if (dot_pos == 0 || dot_pos == without_f.length() - 1)
-                return INVALID;
-            size_t start = 0;
-            if (without_f[0] == '+' || without_f[0] == '-') {
-                if (without_f.length() <= 2 || dot_pos == 1)
-                    return INVALID;
-                start = 1;
-            }
-            for (size_t i = start; i < without_f.length(); i++) {
-                if (i != dot_pos && !isdigit(without_f[i]))
-                    return INVALID;
-            }
-            return FLOAT;
-        }
-        return INVALID;
-    }
-    
-    if (literal.find('.') != std::string::npos) {
-        size_t dot_pos = literal.find('.');
-        if (literal.find('.', dot_pos + 1) == std::string::npos) {
-            if (dot_pos == 0 || dot_pos == literal.length() - 1)
-                return INVALID;
-            size_t start = 0;
-            if (literal[0] == '+' || literal[0] == '-') {
-                if (literal.length() <= 2 || dot_pos == 1)
-                    return INVALID;
-                start = 1;
-            }
-            for (size_t i = start; i < literal.length(); i++) {
-                if (i != dot_pos && !isdigit(literal[i]))
-                    return INVALID;
-            }
-            return DOUBLE;
-        }
-        return INVALID;
-    }
+        return false;
     
     size_t start = 0;
-    if (literal[0] == '+' || literal[0] == '-') {
-        if (literal.length() == 1)
-            return INVALID;
+    if (literal[0] == '+' || literal[0] == '-')
         start = 1;
-    }
+    
+    if (start >= literal.length())
+        return false;
     
     for (size_t i = start; i < literal.length(); i++) {
         if (!isdigit(literal[i]))
-            return INVALID;
+            return false;
+    }
+    return true;
+}
+
+bool ScalarConverter::isValidFloat(const std::string& literal) {
+    if (literal.empty() || literal[literal.length() - 1] != 'f')
+        return false;
+    
+    if (literal == "-inff" || literal == "+inff" || literal == "nanf")
+        return true;
+    
+    std::string withoutF = literal.substr(0, literal.length() - 1);
+    if (withoutF.empty())
+        return false;
+    
+    size_t start = 0;
+    if (withoutF[0] == '+' || withoutF[0] == '-')
+        start = 1;
+    
+    if (start >= withoutF.length())
+        return false;
+    
+    bool hasDot = false;
+    for (size_t i = start; i < withoutF.length(); i++) {
+        if (withoutF[i] == '.') {
+            if (hasDot)
+                return false;
+            hasDot = true;
+        } else if (!isdigit(withoutF[i])) {
+            return false;
+        }
     }
     
-    return INT;
+    return hasDot;
+}
+
+bool ScalarConverter::isValidDouble(const std::string& literal) {
+    if (literal.empty())
+        return false;
+    
+    if (literal == "-inf" || literal == "+inf" || literal == "nan")
+        return true;
+    
+    size_t start = 0;
+    if (literal[0] == '+' || literal[0] == '-')
+        start = 1;
+    
+    if (start >= literal.length())
+        return false;
+    
+    bool hasDot = false;
+    for (size_t i = start; i < literal.length(); i++) {
+        if (literal[i] == '.') {
+            if (hasDot)
+                return false;
+            hasDot = true;
+        } else if (!isdigit(literal[i])) {
+            return false;
+        }
+    }
+    
+    return hasDot;
+}
+
+bool ScalarConverter::isInRange(double value, double min, double max) {
+    return (value >= min && value <= max);
+}
+
+int ScalarConverter::detectType(const std::string& literal) {
+    if (literal.empty())
+        return INVALID;
+    
+    if (isValidChar(literal))
+        return CHAR;
+    
+    if (isValidFloat(literal))
+        return FLOAT;
+    
+    if (isValidDouble(literal))
+        return DOUBLE;
+    
+    if (isValidInt(literal))
+        return INT;
+    
+    return INVALID;
 }
 
 void ScalarConverter::printChar(double value) {
     std::cout << "char: ";
-    if (std::isnan(value) || std::isinf(value) || value < 0 || value > 127) {
+    if (std::isnan(value) || std::isinf(value) || !isInRange(value, 0, 127)) {
         std::cout << "impossible" << std::endl;
     } else if (value < 32 || value == 127) {
         std::cout << "Non displayable" << std::endl;
@@ -101,7 +138,7 @@ void ScalarConverter::printChar(double value) {
 
 void ScalarConverter::printInt(double value) {
     std::cout << "int: ";
-    if (std::isnan(value) || std::isinf(value) || value < INT_MIN || value > INT_MAX) {
+    if (std::isnan(value) || std::isinf(value) || !isInRange(value, INT_MIN, INT_MAX)) {
         std::cout << "impossible" << std::endl;
     } else {
         std::cout << static_cast<int>(value) << std::endl;
@@ -110,37 +147,55 @@ void ScalarConverter::printInt(double value) {
 
 void ScalarConverter::printFloat(double value) {
     std::cout << "float: ";
-    float f = static_cast<float>(value);
-    if (std::isnan(f)) {
+    
+    if (std::isnan(value)) {
         std::cout << "nanf" << std::endl;
-    } else if (std::isinf(f)) {
-        if (f > 0)
+        return;
+    }
+    
+    if (std::isinf(value)) {
+        if (value > 0)
             std::cout << "+inff" << std::endl;
         else
             std::cout << "-inff" << std::endl;
-    } else {
-        std::cout << f;
-        if (f == static_cast<int>(f))
-            std::cout << ".0";
-        std::cout << "f" << std::endl;
+        return;
     }
+    
+    if (!isInRange(value, -FLT_MAX, FLT_MAX)) {
+        if (value > 0)
+            std::cout << "+inff" << std::endl;
+        else
+            std::cout << "-inff" << std::endl;
+        return;
+    }
+    
+    float f = static_cast<float>(value);
+    std::cout << f;
+    if (f == static_cast<int>(f) && isInRange(f, INT_MIN, INT_MAX))
+        std::cout << ".0";
+    std::cout << "f" << std::endl;
 }
 
 void ScalarConverter::printDouble(double value) {
     std::cout << "double: ";
+    
     if (std::isnan(value)) {
         std::cout << "nan" << std::endl;
-    } else if (std::isinf(value)) {
+        return;
+    }
+    
+    if (std::isinf(value)) {
         if (value > 0)
             std::cout << "+inf" << std::endl;
         else
             std::cout << "-inf" << std::endl;
-    } else {
-        std::cout << value;
-        if (value == static_cast<int>(value))
-            std::cout << ".0";
-        std::cout << std::endl;
+        return;
     }
+    
+    std::cout << value;
+    if (value == static_cast<int>(value) && isInRange(value, INT_MIN, INT_MAX))
+        std::cout << ".0";
+    std::cout << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& literal) {
@@ -151,17 +206,59 @@ void ScalarConverter::convert(const std::string& literal) {
         case CHAR:
             value = static_cast<double>(literal[1]);
             break;
-        case INT:
-            value = static_cast<double>(atoi(literal.c_str()));
+        case INT: {
+            errno = 0;
+            char* endptr;
+            long longValue = strtol(literal.c_str(), &endptr, 10);
+            
+            if (errno == ERANGE || longValue > INT_MAX || longValue < INT_MIN) {
+                std::cout << RED << "error: integer overflow!" << RESET << std::endl;
+                return;
+            }
+            if (*endptr != '\0') {
+                std::cout << RED << "error: invalid integer format!" << RESET << std::endl;
+                return;
+            }
+            value = static_cast<double>(longValue);
             break;
-        case FLOAT:
-            value = static_cast<double>(atof(literal.c_str()));
+        }
+        case FLOAT: {
+            errno = 0;
+            char* endptr;
+            std::string withoutF = literal.substr(0, literal.length() - 1);
+            value = strtod(withoutF.c_str(), &endptr);
+            
+            if (errno == ERANGE && (value == HUGE_VAL || value == -HUGE_VAL)) {
+                if (value > 0)
+                    value = std::numeric_limits<double>::infinity();
+                else
+                    value = -std::numeric_limits<double>::infinity();
+            }
+            if (*endptr != '\0' && errno != ERANGE) {
+                std::cout << RED << "error: invalid float format!" << RESET << std::endl;
+                return;
+            }
             break;
-        case DOUBLE:
-            value = atof(literal.c_str());
+        }
+        case DOUBLE: {
+            errno = 0;
+            char* endptr;
+            value = strtod(literal.c_str(), &endptr);
+            
+            if (errno == ERANGE && (value == HUGE_VAL || value == -HUGE_VAL)) {
+                if (value > 0)
+                    value = std::numeric_limits<double>::infinity();
+                else
+                    value = -std::numeric_limits<double>::infinity();
+            }
+            if (*endptr != '\0' && errno != ERANGE) {
+                std::cout << RED << "error: invalid double format!" << RESET << std::endl;
+                return;
+            }
             break;
+        }
         default:
-            std::cout << "Error: Invalid literal" << std::endl;
+            std::cout << RED << "error: invalid literal format!" << RESET << std::endl;
             return;
     }
     

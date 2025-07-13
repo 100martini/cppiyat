@@ -26,7 +26,7 @@ int main() {
     std::cout << std::endl;
     
     if (deserializedPtr == &originalData) {
-        std::cout << GREEN << "succes: deserialized pointer equals original pointer <3" << RESET << std::endl;
+        std::cout << GREEN << "success: deserialized pointer equals original pointer <3" << RESET << std::endl;
     } else {
         std::cout << RED << "error: pointers don't match!" << RESET << std::endl;
     }
