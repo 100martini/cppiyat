@@ -161,20 +161,20 @@ void ScalarConverter::convert(const std::string& literal) {
             break;
         case FLOAT:
             if (!isValidDouble(literal)) {
-                std::cout << "error: invalid float format!" << std::endl;
+                std::cout << RED << "error: invalid float format!" << RESET << std::endl;
                 return;
             }
             value = static_cast<double>(atof(literal.c_str()));
             break;
         case DOUBLE:
             if (!isValidDouble(literal)) {
-                std::cout << "error: invalid double format!" << std::endl;
+                std::cout << RED << "error: invalid double format!" << RESET<< std::endl;
                 return;
             }
             value = atof(literal.c_str());
             break;
         default:
-            std::cout << "error: invalid literal!" << std::endl;
+            std::cout << RED << "error: invalid literal!" << RESET<< std::endl;
             return;
     }
     

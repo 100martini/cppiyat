@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <cctype>
 #include <cerrno>
+#define RED "\e[1;31m"
+#define RESET "\033[0m"
 
 class ScalarConverter {
 private:
