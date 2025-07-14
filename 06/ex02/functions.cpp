@@ -28,15 +28,14 @@ Base* generate(void) {
 }
 
 void identify(Base* p) {
-    if (dynamic_cast<A*>(p)) {
+    if (dynamic_cast<A*>(p))
         std::cout << "A" << std::endl;
-    } else if (dynamic_cast<B*>(p)) {
+    else if (dynamic_cast<B*>(p))
         std::cout << "B" << std::endl;
-    } else if (dynamic_cast<C*>(p)) {
+    else if (dynamic_cast<C*>(p))
         std::cout << "C" << std::endl;
-    } else {
-        std::cout << "Unknown type" << std::endl;
-    }
+    else
+        std::cout << "unknown type!" << std::endl;
 }
 
 void identify(Base& p) {
@@ -61,5 +60,5 @@ void identify(Base& p) {
         return;
     } catch (std::exception&) {}
     
-    std::cout << "Unknown type" << std::endl;
+    std::cout << "unknown type!" << std::endl;
 }
