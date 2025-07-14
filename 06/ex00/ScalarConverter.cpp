@@ -29,12 +29,12 @@ int ScalarConverter::detectType(const std::string& literal) {
    if (literal.length() == 1 && isprint(literal[0]) && !isdigit(literal[0]))
        return CHAR;
    
-   if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
-       return DOUBLE;
-   
    if (literal == "-inff" || literal == "+inff" || literal == "nanf" || 
        literal[literal.length() - 1] == 'f')
        return FLOAT;
+   
+   if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
+       return DOUBLE;
    
    if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
        literal.find('.') != std::string::npos)
