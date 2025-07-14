@@ -30,7 +30,7 @@ int ScalarConverter::detectType(const std::string& literal) {
         return DOUBLE;
     
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" || 
-        (literal.find('.') != std::string::npos && literal[literal.length() - 1] == 'f'))
+        literal[literal.length() - 1] == 'f')
         return FLOAT;
     
     if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
@@ -71,9 +71,18 @@ bool ScalarConverter::isValidDouble(const std::string& literal) {
     char* endptr;
     strtod(literal.c_str(), &endptr);
     
-    if (*endptr != '\0' && literal != "-inf" && literal != "+inf" && literal != "nan") {
+    if (*endptr != '\0') {
+        if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
+            literal == "-inff" || literal == "+inff" || literal == "nanf") {
+            return true;
+        }
+        
+        if (*endptr == 'f' && *(endptr + 1) == '\0')
+            return true;
+        
         return false;
     }
+    
     return true;
 }
 
