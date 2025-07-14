@@ -25,11 +25,10 @@ int main() {
     std::cout << "Address: " << deserializedPtr << std::endl;
     std::cout << std::endl;
     
-    if (deserializedPtr == &originalData) {
+    if (deserializedPtr == &originalData)
         std::cout << GREEN << "success: deserialized pointer equals original pointer <3" << RESET << std::endl;
-    } else {
+    else
         std::cout << RED << "error: pointers don't match!" << RESET << std::endl;
-    }
     
     return 0;
 }
