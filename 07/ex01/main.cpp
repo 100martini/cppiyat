@@ -14,12 +14,12 @@ int main() {
     int intArray[] = {1, 2, 3, 4, 5};
     size_t intSize = 5;
     
-    std::cout << "Array: ";
+    std::cout << GREEN << "array: " << RESET;
     iter(intArray, intSize, print<int>);
     std::cout << std::endl;
     
     iter(intArray, intSize, addOne);
-    std::cout << "After +1: ";
+    std::cout << GREEN << "array+1: " << RESET;
     iter(intArray, intSize, print<int>);
     std::cout << std::endl;
     

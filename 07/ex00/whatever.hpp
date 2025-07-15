@@ -1,5 +1,7 @@
 #ifndef WHATEVER_HPP
 #define WHATEVER_HPP
+#define GREEN "\e[1;32m"
+#define RESET "\033[0m"
 
 template<typename T>
 void swap(T &a, T &b) {
