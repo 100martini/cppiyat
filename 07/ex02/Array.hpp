@@ -16,8 +16,8 @@ public:
     Array<T> &operator=(const Array<T> &other);
     ~Array();
     
-    T &operator[](unsigned int index);
-    const T &operator[](unsigned int index) const;
+    T &operator[](int index);
+    const T &operator[](int index) const;
     unsigned int size() const;
     
     class OutOfBoundsException : public std::exception {

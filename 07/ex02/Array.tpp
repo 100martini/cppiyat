@@ -42,15 +42,15 @@ Array<T>::~Array() {
 }
 
 template<typename T>
-T &Array<T>::operator[](unsigned int index) {
-    if (index >= _size)
+T &Array<T>::operator[](int index) {
+    if (index < 0 || static_cast<unsigned int>(index) >= _size)
         throw OutOfBoundsException();
     return _array[index];
 }
 
 template<typename T>
-const T &Array<T>::operator[](unsigned int index) const {
-    if (index >= _size)
+const T &Array<T>::operator[](int index) const {
+    if (index < 0 || static_cast<unsigned int>(index) >= _size)
         throw OutOfBoundsException();
     return _array[index];
 }
