@@ -59,55 +59,55 @@ int main()
     Array<int> empty;
     Array<int> numbers(5);
     
-    std::cout << "Empty array size: " << empty.size() << std::endl;
-    std::cout << "Numbers array size: " << numbers.size() << std::endl;
+    std::cout << "empty array size: " << empty.size() << std::endl;
+    std::cout << "numbers array size: " << numbers.size() << std::endl;
     
     for (unsigned int i = 0; i < numbers.size(); i++)
         numbers[i] = i * 10;
     
-    std::cout << "Numbers: ";
+    std::cout << "numbers: ";
     for (unsigned int i = 0; i < numbers.size(); i++)
         std::cout << numbers[i] << " ";
     std::cout << std::endl;
 
     std::cout << PURPLE << "\n2: Copy constructor" << RESET << std::endl;
     Array<int> copy(numbers);
-    copy[0] = 999;
-    std::cout << "Original[0]: " << numbers[0] << std::endl;
-    std::cout << "Copy[0]: " << copy[0] << std::endl;
-    std::cout << "Deep copy works: " << (numbers[0] != copy[0] ? "YES" : "NO") << std::endl;
+    copy[0] = 1337;
+    std::cout << "OG[0]: " << numbers[0] << std::endl;
+    std::cout << "copy[0]: " << copy[0] << std::endl;
+    std::cout << "Deep copy works? " << (numbers[0] != copy[0] ? "YES." : "NO.") << std::endl;
 
     std::cout << PURPLE << "\n3: Assignment operator" << RESET << std::endl;
     Array<int> assigned;
     assigned = numbers;
-    assigned[1] = 888;
-    std::cout << "Original[1]: " << numbers[1] << std::endl;
-    std::cout << "Assigned[1]: " << assigned[1] << std::endl;
+    assigned[1] = 1337;
+    std::cout << "OG[1]: " << numbers[1] << std::endl;
+    std::cout << "assigned[1]: " << assigned[1] << std::endl;
 
     std::cout << PURPLE << "\n4: Out of bounds" << RESET << std::endl;
     try {
-        std::cout << "Trying numbers[10]..." << std::endl;
+        std::cout << "trying numbers[10]" << std::endl;
         numbers[10] = 42;
     }
     catch (std::exception &e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+        std::cout << "exception: " << e.what() << std::endl;
     }
     
     try {
-        std::cout << "Trying numbers[-1]..." << std::endl;
+        std::cout << "trying numbers[-1]" << std::endl;
         numbers[-1] = 42;
     }
     catch (std::exception &e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+        std::cout << "exception: " << e.what() << std::endl;
     }
 
     std::cout << PURPLE << "\n5: Other types" << RESET << std::endl;
     Array<std::string> strings(3);
-    strings[0] = "Hello";
-    strings[1] = "World";
+    strings[0] = "Khdama?";
+    strings[1] = "Khdama";
     strings[2] = "!";
     
-    std::cout << "Strings: ";
+    std::cout << "strings: ";
     for (unsigned int i = 0; i < strings.size(); i++)
         std::cout << strings[i] << " ";
     std::cout << std::endl;
