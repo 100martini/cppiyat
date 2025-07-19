@@ -1,5 +1,7 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
+#define PURPLE "\e[1;35m"
+#define RESET "\033[0m"
 
 #include <exception>
 
