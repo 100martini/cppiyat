@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <exception>
+#include <iterator>
 
 class Span
 {
@@ -25,8 +26,9 @@ public:
 	template <typename Iterator>
 	void addRange(Iterator begin, Iterator end)
 	{
-		if (std::distance(begin, end) + _numbers.size() > _maxSize)
-			throw std::exception();
+		typename std::iterator_traits<Iterator>::difference_type distance = std::distance(begin, end);
+		if (static_cast<unsigned int>(distance) + _numbers.size() > _maxSize)
+			throw FullSpanException();
 		_numbers.insert(_numbers.end(), begin, end);
 	}
 

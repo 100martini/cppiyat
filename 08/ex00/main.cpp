@@ -12,11 +12,11 @@ int main()
 	try
 	{
 		std::vector<int>::iterator it = easyfind(vec, 2);
-		std::cout << "Found: " << *it << std::endl;
+		std::cout<< "L9inaha! wach " << *it << "?" << std::endl;
 	}
 	catch (std::exception& e)
 	{
-		std::cout << "Element not found" << std::endl;
+		std::cout << "Mal9inahach :(" << std::endl;
 	}
 
 	try
@@ -25,7 +25,7 @@ int main()
 	}
 	catch (std::exception& e)
 	{
-		std::cout << "Element not found" << std::endl;
+		std::cout << "Mal9inahach :(" << std::endl;
 	}
 
 	return 0;
