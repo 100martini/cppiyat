@@ -3,6 +3,9 @@
 
 #include <stack>
 #include <deque>
+#define GREEN "\e[1;32m"
+#define PURPLE "\e[1;35m"
+#define RESET "\033[0m"
 
 template <typename T>
 class MutantStack : public std::stack<T>
