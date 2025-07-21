@@ -19,9 +19,10 @@ int main()
 		std::cout << "Mal9inahach :(" << std::endl;
 	}
 
+	vec.pop_back();
 	try
 	{
-		easyfind(vec, 10);
+		easyfind(vec, 3);
 	}
 	catch (std::exception& e)
 	{
